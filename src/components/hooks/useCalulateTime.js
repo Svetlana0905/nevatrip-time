@@ -6,6 +6,7 @@ const TIME_TRAVEL = "50:00";
 export const useCalculateTime = (props) => {
   const [time, setTime] = useState(null);
   const [stringTime, setStringTime] = useState("");
+  const [travelDuration, setTravelDuration] = useState("");
 
   let today = new Date(); // текущая дата строка Sat Oct 08 2022 23:34:39 GMT+0300 (Москва, стандартное время)
   let year = today.getFullYear(); // 2022
@@ -13,6 +14,23 @@ export const useCalculateTime = (props) => {
   let day = today.getDate(); // текущий день
 
   const travelTime = useFormatTime(TIME_TRAVEL);
+
+  useEffect(() => {
+    if (props.timeStart && props.timeBack) {
+      let timeStart = Date.parse(
+        `${year}, ${month}, ${day}, ${props.timeStart}`
+      );
+      let timeBack =
+        Date.parse(`${year}, ${month}, ${day}, ${props.timeBack}`) + travelTime;
+      let different = timeBack - timeStart;
+      let hours = Math.floor((different % 86400000) / 3600000);
+      let minutes = Math.round(((different % 86400000) % 3600000) / 60000);
+
+      setTravelDuration(hours + ":" + minutes);
+    } else setTravelDuration("50");
+  }, [day, month, year, props.timeStart, props.timeBack, travelTime]);
+
+  console.log(travelDuration);
 
   useEffect(() => {
     if (props.roundTrip && props.timeStart && props.timeBack) {
@@ -41,5 +59,5 @@ export const useCalculateTime = (props) => {
     }
   }, [time]);
 
-  return stringTime;
+  return { stringTime, travelDuration };
 };

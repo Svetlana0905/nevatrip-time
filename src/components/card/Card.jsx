@@ -19,13 +19,13 @@ export const Card = () => {
     timeFromSelect: timeFromSelect,
     roundTrip: roundTrip,
   });
-  const totalTime = useCalculateTime({
+  const { stringTime, travelDuration } = useCalculateTime({
     timeStart: timeFromSelect,
     roundTrip: roundTrip,
     timeBack: timeFromSelectBack,
   });
 
-  console.log(totalTime);
+  console.log(stringTime);
 
   useEffect(() => {
     if (route !== "из A в B и обратно в А") {
@@ -97,7 +97,8 @@ export const Card = () => {
             route={route}
             price={totalPrice}
             start={timeFromSelect}
-            totalTime={totalTime}
+            totalTime={stringTime}
+            duration={travelDuration}
           />
         </div>
       )}
