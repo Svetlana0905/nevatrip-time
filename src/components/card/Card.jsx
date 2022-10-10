@@ -1,7 +1,7 @@
 import "./card.scss";
 import { tripData } from "../../data/tripData";
 import { useEffect, useState } from "react";
-import { MySelect } from "../ui/select";
+import { MySelect, SelectRoute } from "../ui/select";
 import { MyInput } from "../ui/input";
 import { useCountTimeBack } from "../hooks/useCountTime";
 import { useTotalPrice } from "../hooks/calculatePrice";
@@ -15,17 +15,18 @@ export const Card = () => {
   const [roundTrip, setRoundTrip] = useState(false);
   const [timeFromSelectBack, setTimeFromSelectBack] = useState("");
   const [countTicket, setCountTicket] = useState("");
+
   const timesBack = useCountTimeBack({
     timeFromSelect: timeFromSelect,
     roundTrip: roundTrip,
+    timeOneWay: tripData.timeOneWay,
   });
   const { stringTime, travelDuration } = useCalculateTime({
     timeStart: timeFromSelect,
     roundTrip: roundTrip,
     timeBack: timeFromSelectBack,
+    timeOneWay: tripData.timeOneWay,
   });
-
-  console.log(stringTime);
 
   useEffect(() => {
     if (route !== "из A в B и обратно в А") {
@@ -45,20 +46,11 @@ export const Card = () => {
     round: roundTrip,
     timeBack: timeFromSelectBack,
   });
-  console.log(totalPrice);
 
   return (
     <div className="card flex-column">
       <h1>Билеты на событие</h1>
-      <select
-        name="route"
-        id="route"
-        onChange={(e) => setRoute(e.target.value)}
-      >
-        <option value="из A в B">из A в B</option>
-        <option value="из B в A">из B в A</option>
-        <option value="из A в B и обратно в А">из A в B и обратно в А</option>
-      </select>
+      <SelectRoute setRoute={setRoute} />
       <MySelect
         trigger={timeDep}
         handleClick={setTimeFromSelect}
@@ -80,9 +72,6 @@ export const Card = () => {
       )}
       <span>Время туда {timeFromSelect} </span>
       {roundTrip && <span>Время обратно {timeFromSelectBack}</span>}
-      <span style={{ marginBottom: "15px" }}>
-        Количество билетов {countTicket}
-      </span>
       <MyInput handleClick={setCountTicket} value={countTicket} />
       {ticketError && (
         <span style={{ color: "red", maxWidth: "300px" }}>

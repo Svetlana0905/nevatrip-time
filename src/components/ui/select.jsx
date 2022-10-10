@@ -25,3 +25,16 @@ export const MySelect = (props) => {
     </>
   );
 };
+export const SelectRoute = (props) => {
+  return (
+    <select
+      name="route"
+      id="route"
+      onChange={(e) => props.setRoute(e.target.value)}
+    >
+      <option value="из A в B">из A в B</option>
+      <option value="из B в A">из B в A</option>
+      <option value="из A в B и обратно в А">из A в B и обратно в А</option>
+    </select>
+  );
+};

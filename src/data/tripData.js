@@ -17,9 +17,9 @@ export const tripData = {
     "19:00:00",
     "19:30:00",
     "21:00:00",
-    "23:50:00",
+    // "23:50:00",
   ],
   oneTicketPrice: 700,
-  timeOneWay: 50,
+  timeOneWay: "50:00",
   roundTicketPrice: 1200,
 };
