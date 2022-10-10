@@ -1,0 +1,7 @@
+@import "../../styles/app.scss";
+.card {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
