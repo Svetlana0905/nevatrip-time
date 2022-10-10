@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/nevatrip-time/static/css/main.aa8374cb.css",
+    "main.js": "/nevatrip-time/static/js/main.a7e18e22.js",
+    "index.html": "/nevatrip-time/index.html",
+    "main.aa8374cb.css.map": "/nevatrip-time/static/css/main.aa8374cb.css.map",
+    "main.a7e18e22.js.map": "/nevatrip-time/static/js/main.a7e18e22.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.aa8374cb.css",
+    "static/js/main.a7e18e22.js"
+  ]
+}
